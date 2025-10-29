@@ -1,0 +1,6 @@
+# TODO: evaluation helpers for ROC/PR curves, threshold tuning, confusion matrix, SHAP
+# HINTS:
+# - def threshold_by_recall(y_true, y_proba, target_recall): ...
+# - def plot_roc_pr(y_true, y_proba): ...
+# - def eval_at_threshold(y_true, y_proba, thr): return precision, recall, f1, support
+

@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# Data & artifacts
+data/interim/
+artifacts/
+*.parquet
+*.feather
+*.npy
+*.npz
+
+# OS/IDE
+.DS_Store
+.idea/
+.vscode/
+
