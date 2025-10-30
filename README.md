@@ -54,6 +54,12 @@ This enables proactive content planning: schedule, format, and creative choices 
 - 2025: 2,771 posts (high-frequency posting period)
 - Inverted ratio: 37% train / 63% test (unusual!)
 
+<div align="center">
+<img src="images/posts_per_month.png" alt="Posts per month over time showing dramatic increase in posting frequency from 2024 to 2025" width="800"/>
+
+*Posts per month (2024-2025): Clear increase in posting frequency over time, explaining the inverted train/test ratio*
+</div>
+
 **Decision:** Use all 2024 for training, early 2025 for validation, rest for test
 - Training: All 2024 data (1,635 posts)
 - Validation: 2025 Jan-Feb (temporal validation)
