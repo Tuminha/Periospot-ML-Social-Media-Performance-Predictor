@@ -103,6 +103,12 @@ Features known BEFORE publishing:
   - Regular Posts (label=0): 3,367 posts (89.9%) - engagement <7.14%
 - **Imbalance Strategy:** 90/10 split is moderate and manageable with class weights in tree models
 
+<div align="center">
+<img src="images/distribution_engagement_rate.png" alt="Engagement rate distribution showing right-skewed pattern with 80th and 90th percentile thresholds marked" width="900"/>
+
+*Distribution analysis: Histogram, log-scale view, boxplot (outliers), and CDF. Heavy right skew with most posts <5% engagement. Red line (80th %ile) = 4.62%, Orange line (90th %ile) = 7.14%*
+</div>
+
 **Final Clean Dataset:**
 - 3,745 posts (2024-2025)
 - ≥20 impressions per post
