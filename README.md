@@ -88,13 +88,34 @@ Features known BEFORE publishing:
 - **Missing captions:** 2.7% of posts (mostly Stories and image-only posts on Instagram/Threads) - expected behavior
 - **Zero-impression posts:** Minimal overlap with missing engagement rates - data quality is good
 
+### Data Cleaning & Threshold Selection ✅
+
+**Minimum Impression Filter:**
+- **Decision:** Filter out posts with <20 impressions
+- **Rationale:** Low-impression posts (1-19) have unreliable engagement rates (e.g., 1 impression + 1 engagement = 100% but not statistically meaningful)
+- **Impact:** Removed 395 posts (9.5%), retained 3,745 posts with ≥20 impressions
+
+**Binary Threshold Selection:**
+- **Decision:** 90th percentile = **7.14% engagement rate**
+- **Rationale:** Focus on exceptional posts (not just above-average). Meaningful difference from 80th percentile (4.62%) - represents 54% improvement in engagement
+- **Class Distribution:**
+  - High Performers (label=1): 378 posts (10.1%) - engagement ≥7.14%
+  - Regular Posts (label=0): 3,367 posts (89.9%) - engagement <7.14%
+- **Imbalance Strategy:** 90/10 split is moderate and manageable with class weights in tree models
+
+**Final Clean Dataset:**
+- 3,745 posts (2024-2025)
+- ≥20 impressions per post
+- Valid engagement rate target
+- Binary labels created
+- Ready for feature engineering
+
 ### Next Steps
-- [ ] Explore target distribution and choose binary threshold (percentile-based)
 - [ ] Feature engineering: time features, text features, categorical encoding
-- [ ] Temporal train/validation/test split implementation
+- [ ] Temporal train/validation/test split implementation (2024 train, early 2025 val, rest test)
 - [ ] Baseline models (Logistic Regression, majority class)
-- [ ] Tree ensembles (RandomForest, XGBoost with hyperparameter tuning)
-- [ ] Threshold optimization for business goal (maximize recall at acceptable precision)
+- [ ] Tree ensembles (RandomForest, XGBoost with class weights for imbalance)
+- [ ] Evaluation with proper imbalanced metrics (ROC-AUC, PR-AUC, not just accuracy)
 - [ ] SHAP analysis for feature importance and interpretability
 - [ ] Per-network robustness checks
 
