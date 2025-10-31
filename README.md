@@ -238,6 +238,12 @@ Engagement Performance =
 - **Precision-Recall Curve:** Sharp drop, flatlines at ~15-20% precision
 - Model struggles to maintain precision as it tries to catch more high performers
 
+<div align="center">
+<img src="images/model_curves.png" alt="ROC and Precision-Recall curves showing weak discrimination ability of pure content model. ROC-AUC=0.616 (barely above random 0.5), PR-AUC=0.169 (only 1.7x better than baseline). Curves demonstrate that content features alone have limited predictive power." width="900"/>
+
+*Model performance curves for pure content model (no Profile/Network). Left: ROC curve hugs diagonal (random guessing). Right: Precision-Recall curve shows sharp drop and low precision at high recall.*
+</div>
+
 ---
 
 ### 📊 Content Insights (Marginal but Real)
@@ -258,6 +264,12 @@ Engagement Performance =
 | 10 | **caption_length** | 5.0% | ✅ Longer captions provide context |
 
 **These patterns are REAL but provide only 10-20% performance edge.**
+
+<div align="center">
+<img src="images/feature_importance.png" alt="Top 15 feature importances from XGBoost pure content model (no Profile/Network features). Leading features: has_numbers (11.1%), Post Type_Post (10.1%), Content Type_Video (9.9%), mention_count (7.4%), url_count (6.9%). Time features (hour, day_of_week, is_morning) have minimal importance." width="900"/>
+
+*Feature importance analysis reveals actionable content patterns: including numbers/data, posting videos, tagging people, and adding external links are the strongest predictive signals for high-performing content.*
+</div>
 
 ---
 
