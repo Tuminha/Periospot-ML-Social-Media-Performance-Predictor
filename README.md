@@ -116,14 +116,45 @@ Features known BEFORE publishing:
 - Binary labels created
 - Ready for feature engineering
 
+### Feature Engineering ✅
+
+**Time Features (8):**
+- Extracted from `Date` column: hour, day_of_week, month, quarter
+- Derived indicators: is_weekend, is_morning, is_afternoon, is_evening
+
+**Text Features (9):**
+- Caption analysis: caption_length, word_count
+- Pattern counts: hashtag_count, mention_count, url_count
+- Content indicators: has_question_mark, has_numbers, has_list_format, has_emoji
+
+**Categorical Features (17 after one-hot encoding):**
+- Network (6): Facebook, Instagram, LinkedIn, Threads, TikTok, X
+- Post Type (5): '@Reply, Post, Quote, Reel, Story
+- Content Type (5): Carousel, Link, Photo, Text, Video
+- Profile (6): Different account identifiers across platforms
+
+**Total Pre-Posting Features: 39** (no leakage - verified)
+
+### Train/Test Split ✅
+
+**Temporal Split (No Data Leakage):**
+- Training: All 2024 posts (1,433 posts, 158 high performers, 11.0%)
+- Test: All 2025 posts (2,312 posts, 220 high performers, 9.5%)
+- Class balance nearly identical between splits (no distribution shift)
+
+**Why Temporal Split:**
+- Simulates production: train on past, predict future
+- No data leakage (model never sees future during training)
+- Realistic evaluation of generalization
+
 ### Next Steps
-- [ ] Feature engineering: time features, text features, categorical encoding
-- [ ] Temporal train/validation/test split implementation (2024 train, early 2025 val, rest test)
-- [ ] Baseline models (Logistic Regression, majority class)
-- [ ] Tree ensembles (RandomForest, XGBoost with class weights for imbalance)
+- [ ] Baseline models (Majority class, Logistic Regression)
+- [ ] Tree ensembles (RandomForest, XGBoost with class weights for 90/10 imbalance)
+- [ ] Hyperparameter tuning (GridSearchCV on training data)
 - [ ] Evaluation with proper imbalanced metrics (ROC-AUC, PR-AUC, not just accuracy)
-- [ ] SHAP analysis for feature importance and interpretability
+- [ ] Feature importance analysis (model-based + SHAP)
 - [ ] Per-network robustness checks
+- [ ] Business insights extraction
 
 ---
 
