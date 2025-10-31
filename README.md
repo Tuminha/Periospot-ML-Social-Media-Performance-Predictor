@@ -135,17 +135,24 @@ Features known BEFORE publishing:
 
 **Total Pre-Posting Features: 39** (no leakage - verified)
 
-### Train/Test Split ✅
+### Train/Validation/Test Split ✅
 
-**Temporal Split (No Data Leakage):**
-- Training: All 2024 posts (1,433 posts, 158 high performers, 11.0%)
-- Test: All 2025 posts (2,312 posts, 220 high performers, 9.5%)
-- Class balance nearly identical between splits (no distribution shift)
+**3-Way Temporal Split (No Data Leakage):**
+- **Training:** Jan-Nov 2024 (970 posts, 105 high performers, 10.8%)
+- **Validation:** Dec 2024 (463 posts, 53 high performers, 11.4%)
+- **Test:** All 2025 (2,312 posts, 220 high performers, 9.5%)
 
-**Why Temporal Split:**
-- Simulates production: train on past, predict future
-- No data leakage (model never sees future during training)
-- Realistic evaluation of generalization
+**Split Discovery Process:**
+- Initial attempt: Jan-Aug (train) vs Sep-Dec (val) resulted in imbalanced sizes (486 vs 947)
+- Root cause: Posting frequency increased significantly in late 2024, with December having the highest concentration
+- Solution: Split at month 12 (< 12 for train, >= 12 for val) to balance sample sizes while preserving temporal order
+- Final ratio: ~68% train / 32% val (of 2024 data)
+
+**Why This Works:**
+- ✅ **Temporal order preserved:** Past → Present → Future (no data leakage)
+- ✅ **Balanced sizes:** 970 training samples is sufficient for tree models, 463 validation samples allows reliable hyperparameter tuning
+- ✅ **Consistent class distribution:** 9.5-11.4% high performers across all splits (no distribution shift)
+- ✅ **Production-realistic:** Model trained on past data, tuned on recent data, evaluated on future data
 
 ### Next Steps
 - [ ] Baseline models (Majority class, Logistic Regression)
