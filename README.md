@@ -154,14 +154,43 @@ Features known BEFORE publishing:
 - ✅ **Consistent class distribution:** 9.5-11.4% high performers across all splits (no distribution shift)
 - ✅ **Production-realistic:** Model trained on past data, tuned on recent data, evaluated on future data
 
+### Baseline Models ✅
+
+**1. Dummy Classifier (Majority Class Baseline):**
+- Strategy: Always predict most frequent class (0 = "Not High Performer")
+- **Test Results:**
+  - Accuracy: 90.5% (misleading - just predicting majority class)
+  - Recall for class 1: **0%** (catches ZERO high performers)
+  - Precision for class 1: 0% (undefined - no predictions)
+  - **Conclusion:** Useless baseline - establishes performance floor
+
+**2. Logistic Regression (First Real Model):**
+- Configuration: `class_weight='balanced'`, `max_iter=5000`, with StandardScaler
+- **Test Results:**
+  - Accuracy: 65%
+  - Recall for class 1: **53%** (catches 116 out of 220 high performers) ✅
+  - Precision for class 1: 14% (~830 flagged posts total)
+  - **Conclusion:** Solid baseline - proves features contain signal!
+
+**Key Learning:**
+- Without `class_weight='balanced'`: Model ignores minority class → 0% recall
+- With `class_weight='balanced'`: Model actually learns → 53% recall
+- **Accuracy is a vanity metric for imbalanced data** - focus on recall/precision/ROC-AUC
+- Feature scaling had minimal impact (features already well-behaved)
+
+**Baseline Performance Floor: 53% recall**
+- This is what tree ensembles must beat
+- 53% recall = catching ~half of exceptional posts before publishing
+- Next: RandomForest and XGBoost should achieve 60-75% recall
+
 ### Next Steps
-- [ ] Baseline models (Majority class, Logistic Regression)
-- [ ] Tree ensembles (RandomForest, XGBoost with class weights for 90/10 imbalance)
-- [ ] Hyperparameter tuning (GridSearchCV on training data)
-- [ ] Evaluation with proper imbalanced metrics (ROC-AUC, PR-AUC, not just accuracy)
+- [ ] Tree ensembles (RandomForest, XGBoost with class weights)
+- [ ] Hyperparameter tuning on validation set
+- [ ] Evaluation with ROC-AUC, PR-AUC curves
 - [ ] Feature importance analysis (model-based + SHAP)
 - [ ] Per-network robustness checks
 - [ ] Business insights extraction
+- [ ] Final model selection and test set evaluation
 
 ---
 
