@@ -104,7 +104,7 @@ Features known BEFORE publishing:
 - **Imbalance Strategy:** 90/10 split is moderate and manageable with class weights in tree models
 
 <div align="center">
-<img src="images/distribution_engagement_rate.png" alt="Engagement rate distribution showing right-skewed pattern with 80th and 90th percentile thresholds marked" width="900"/>
+<img src="images/engagement_rate_diagnostics.png" alt="Engagement rate distribution showing right-skewed pattern with 80th and 90th percentile thresholds marked" width="900"/>
 
 *Distribution analysis: Histogram, log-scale view, boxplot (outliers), and CDF. Heavy right skew with most posts <5% engagement. Red line (80th %ile) = 4.62%, Orange line (90th %ile) = 7.14%*
 </div>
